@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solar Savings Calculator</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: white;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .calculator {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 0 auto;
+      max-width: 400px;
+    }
+
+    .calculator label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .calculator input {
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .calculator button {
+      background-color: transparent;
+      color: gold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 25px;
+      font-weight: 600px;
+      border: 5px solid gold;
+    }
+
+    .calculator button:hover {
+      background: navy;
+    }
+
+    #results {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    #results p {
+      margin-bottom: 5px;
+    }
+
+    .hidden {
+      visibility: hidden;
+    }
+
+    .logo {
+      /* No specific styles added here */
+    }
+
+    .image-container {
+      text-align: center;
+    }
+
+    .makeitshine {
+      display: inline-block;
+      background: darkgoldenrod -webkit-gradient(linear, 100% 0, 0 0, from(gold), color-stop(0.5, yellow), to(goldenrod));
+      background-position: -4rem top; /*50px*/
+      background-repeat: no-repeat;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-animation-name: shimmer;
+      -webkit-animation-duration: 12.0s;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-background-size: 20rem 100%; /*50px*/
+    }
+
+    @-webkit-keyframes shimmer {
+      0% {
+        background-position: -4rem top; /*50px*/
+      }
+
+      70% {
+        background-position: 120.0rem top; /*200px*/
+      }
+
+      100% {
+        background-position: 120.0rem top; /*200px*/
+      }
+    }
+
+    .makeitshine {
+      text-shadow: 0px 0px 50px yellow;
+      font-weight: 600px;
+    }
+  </style>
+</head>
+<body>
+  <div class="image-container">
+    <img class="logo" width="150px" src="https://freesolarbids.com/wp-content/uploads/2024/03/FSB__2_-removebg-preview.png" alt="Free online solar analysis"/>
+  </div>
+  <h1>Solar Savings Calculator</h1>
+  <div class="calculator">
+    <label for="electricity-bill">Average Monthly Electricity Bill ($):</label>
+    <input type="number" id="electricity-bill" min="0" required>
+    <label for="electricity-rate">Electricity Cost per kWh (typical units: cents/kWh):</label>
+    <input type="number" id="electricity-rate" min="0" step="0.01" required>
+    <p class="tip">Don't know your electricity rate? Find it on your latest bill.</p>
+    <button onclick="calculateSavings()">
+      <p class="makeitshine">Calculate Savings</p>
+    </button>
+  </div>
+  <div id="results" class="hidden">
+    <h2>Estimated Savings</h2>
+    <p>Monthly Electricity Cost: $<span id="electricity-cost"></span></p>
+    <p>Estimated Monthly Solar Savings: $<span id="solar-savings"></span></p>
+    <p>System Cost: $<span id="system-cost"></span></p>
+  </div>
+  <script>
+    function calculateSavings() {
+      const electricityBill = parseFloat(document.getElementById("electricity-bill").value);
+      const electricityRate = parseFloat(document.getElementById("electricity-rate").value);
+      const solarProduction = parseFloat(document.getElementById("solar-production").value); // Placeholder for future implementation
+      const systemCost = 10000; // Placeholder value, can be made dynamic
+
+      const electricityCost = electricityBill / electricityRate;
+      const solarSavings = solarProduction * electricityRate;
+
+      document.getElementById("electricity-cost").textContent = electricityCost.toFixed(2);
+      document.getElementById("solar-savings").textContent = solarSavings.toFixed(2);
+      document.getElementById("system-cost").textContent = systemCost.toFixed(2);
+
+      const results = document.getElementById("results");
+      results.classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>
